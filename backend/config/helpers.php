@@ -1,4 +1,9 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -32,12 +37,42 @@ function generateComplaintNo() {
     return 'PW' . date('Ymd') . str_pad(rand(1000, 9999), 4, '0', STR_PAD_LEFT);
 }
 
-// Simple email simulation - in production use PHPMailer or SMTP
+// Send email using PHPMailer
 function sendEmail($to, $subject, $body) {
-    // In production: use mail() or PHPMailer
-    // For demo, we log to a file
-    $log = date('Y-m-d H:i:s') . " | TO: $to | SUBJECT: $subject\n$body\n---\n";
-    file_put_contents(__DIR__ . '/../email_log.txt', $log, FILE_APPEND);
-    return true;
+    $mail = new PHPMailer(true);
+
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        
+        // =======================================================================
+        // TODO: REPLACE THESE PLACEHOLDERS WITH YOUR ACTUAL GMAIL EMAIL & APP PASSWORD
+        // =======================================================================
+        $mail->Username   = 'apublicwatch297@gmail.com';                 // SMTP username
+        $mail->Password   = 'truw jkwa doel zhdy';       // SMTP password
+        // =======================================================================
+
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption
+        $mail->Port       = 587;                                    // TCP port to connect to
+
+        // Recipients
+        $mail->setFrom($mail->Username, 'PublicWatch System');
+        $mail->addAddress($to);
+
+        // Content
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        // Log the error if mail failed so that the API doesn't crash completely,
+        // or optionally throw it. Currently logging to a file.
+        $log = date('Y-m-d H:i:s') . " | Error sending email to: $to | Error: {$mail->ErrorInfo}\n";
+        file_put_contents(__DIR__ . '/../email_error_log.txt', $log, FILE_APPEND);
+        return false;
+    }
 }
 ?>
