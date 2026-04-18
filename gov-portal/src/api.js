@@ -1,4 +1,4 @@
-export const BASE = 'http://localhost/publicwatchnew/backend/api';
+export const BASE = 'https://backtalk-hypocrite-multiply.ngrok-free.dev/publicwatchnew/backend/api';
 
 export const DEPARTMENTS = [
   'Property Tax','Birth and death','Health/Sanitation Department','PWD Department',

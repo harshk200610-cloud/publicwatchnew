@@ -1,4 +1,4 @@
-const BASE = 'http://localhost/publicwatchnew/backend/api';
+const BASE = 'https://backtalk-hypocrite-multiply.ngrok-free.dev/publicwatchnew/backend/api';
 
 export const api = {
   // Auth
@@ -30,7 +30,7 @@ export const api = {
   markNotificationsRead: (uid) => fetch(`${BASE}/authority.php?action=mark_read`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({user_id: uid}) }).then(r => r.json()),
 };
 
-export const UPLOAD_BASE = 'http://localhost/publicwatchnew/backend';
+export const UPLOAD_BASE = 'https://backtalk-hypocrite-multiply.ngrok-free.dev/publicwatchnew/backend';
 export const DEPARTMENTS = [
   'Property Tax','Birth and death','Health/Sanitation Department','PWD Department',
   'Water Tax','Fire brigade department','Establishment department','Town planning',
