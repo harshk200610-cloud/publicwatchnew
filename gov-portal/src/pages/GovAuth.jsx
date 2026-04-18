@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useGovAuth } from '../context/GovAuthContext';
 import { DEPARTMENTS } from '../api';
 
-const BASE = 'http://localhost/publicwatch/backend/api';
+const BASE = 'http://localhost/publicwatchnew/backend/api';
 
 export function GovLogin() {
   const [form, setForm] = useState({ vvcmc_id: '', password: '' });
@@ -29,9 +29,9 @@ export function GovLogin() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <div style={{ fontSize:'1.8rem', fontWeight:700, color:'var(--white)' }}>VVCMC Portal</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 700, color: 'var(--white)' }}>VVCMC Portal</div>
           <div className="auth-sub">Authority Login — Government Officials Only</div>
-          <div style={{ marginTop:'0.75rem', padding:'0.5rem 0.9rem', background:'rgba(244,162,97,0.08)', border:'1px solid rgba(244,162,97,0.2)', borderRadius:6, fontSize:'0.75rem', color:'var(--gold)' }}>
+          <div style={{ marginTop: '0.75rem', padding: '0.5rem 0.9rem', background: 'rgba(244,162,97,0.08)', border: '1px solid rgba(244,162,97,0.2)', borderRadius: 6, fontSize: '0.75rem', color: 'var(--gold)' }}>
             🔒 Restricted Access. Authorized Personnel Only.
           </div>
         </div>
@@ -39,22 +39,22 @@ export function GovLogin() {
         <form onSubmit={submit}>
           <div className="form-group">
             <label className="form-label">VVCMC Authority ID</label>
-            <input className="form-input" required value={form.vvcmc_id} onChange={e => setForm({...form, vvcmc_id: e.target.value})} placeholder="VVCMCID12345" />
+            <input className="form-input" required value={form.vvcmc_id} onChange={e => setForm({ ...form, vvcmc_id: e.target.value })} placeholder="VVCMCID12345" />
           </div>
           <div className="form-group">
             <label className="form-label">Password</label>
-            <input className="form-input" type="password" required value={form.password} onChange={e => setForm({...form, password: e.target.value})} placeholder="••••••••" />
+            <input className="form-input" type="password" required value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} placeholder="••••••••" />
           </div>
           <button type="submit" className="btn btn-primary btn-full btn-lg" disabled={loading}>
             {loading ? 'Authenticating...' : 'Login to Portal'}
           </button>
         </form>
         <div className="divider">or</div>
-        <div style={{ textAlign:'center', fontSize:'0.82rem', color:'var(--grey)' }}>
-          Need an account? <Link to="/gov/register" style={{ color:'var(--teal)' }}>Register Authority</Link>
+        <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--grey)' }}>
+          Need an account? <Link to="/gov/register" style={{ color: 'var(--teal)' }}>Register Authority</Link>
         </div>
-        <div style={{ textAlign:'center', marginTop:'1rem', fontSize:'0.75rem', color:'var(--grey-dark)' }}>
-          Citizen Portal: <a href="http://localhost:3000" style={{ color:'var(--grey)' }}>publicwatch.vvcmc.in</a>
+        <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.75rem', color: 'var(--grey-dark)' }}>
+          Citizen Portal: <a href="http://localhost:3000" style={{ color: 'var(--grey)' }}>publicwatch.vvcmc.in</a>
         </div>
       </div>
     </div>
@@ -62,23 +62,23 @@ export function GovLogin() {
 }
 
 const POSTS = [
-  'Municipal Commissioner','Deputy Commissioner','Assistant Commissioner',
-  'Executive Engineer','Junior Engineer','Health Officer','Sanitary Inspector',
-  'Revenue Officer','City Planner','Ward Officer','Section Officer','Clerk',
-  'Technical Assistant','Data Entry Operator','Field Supervisor'
+  'Municipal Commissioner', 'Deputy Commissioner', 'Assistant Commissioner',
+  'Executive Engineer', 'Junior Engineer', 'Health Officer', 'Sanitary Inspector',
+  'Revenue Officer', 'City Planner', 'Ward Officer', 'Section Officer', 'Clerk',
+  'Technical Assistant', 'Data Entry Operator', 'Field Supervisor'
 ];
 
 export function GovRegister() {
   const [form, setForm] = useState({
-    full_name:'', email:'', contact_no:'', department:'', block_no:'',
-    floor_no:'', desk_no:'', post:'', age:'', sex:'', password:'', confirm:''
+    full_name: '', email: '', contact_no: '', department: '', block_no: '',
+    floor_no: '', desk_no: '', post: '', age: '', sex: '', password: '', confirm: ''
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const set = (k, v) => setForm(f => ({...f, [k]: v}));
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
   const submit = async (e) => {
     e.preventDefault(); setError('');
@@ -97,10 +97,10 @@ export function GovRegister() {
   };
 
   return (
-    <div className="auth-page" style={{ alignItems:'flex-start', paddingTop:'3rem' }}>
-      <div className="auth-card" style={{ maxWidth:600 }}>
+    <div className="auth-page" style={{ alignItems: 'flex-start', paddingTop: '3rem' }}>
+      <div className="auth-card" style={{ maxWidth: 600 }}>
         <div className="auth-header">
-          <div style={{ fontSize:'1.6rem', fontWeight:700 }}>Create Authority Account</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700 }}>Create Authority Account</div>
           <div className="auth-sub">VVCMC Government Officials Registration</div>
         </div>
         {error && <div className="alert alert-error">⚠️ {error}</div>}
@@ -176,8 +176,8 @@ export function GovRegister() {
           </button>
         </form>
         <div className="divider">or</div>
-        <div style={{ textAlign:'center', fontSize:'0.82rem', color:'var(--grey)' }}>
-          Already have an account? <Link to="/gov/login" style={{ color:'var(--teal)' }}>Login here</Link>
+        <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--grey)' }}>
+          Already have an account? <Link to="/gov/login" style={{ color: 'var(--teal)' }}>Login here</Link>
         </div>
       </div>
     </div>
